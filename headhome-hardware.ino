@@ -2,7 +2,7 @@
 #include <ArduinoJson.h>
 #define BUTTON_PIN 4
 
-int SOS = 0;
+int alert = 0;
 float targetBearing = 0;
 int targetDistance = 0;
 bool deviceConnected = false;
@@ -102,9 +102,9 @@ class HeadhomeCharCallbacks: public BLECharacteristicCallbacks {
       DynamicJsonDocument doc(1024);
       deserializeJson(doc, receivedValue);
 
-      SOS = doc["SOS"];
+      alert = doc["alert"];
       
-      if (SOS) {
+      if (alert) {
         Serial.println("SOS detected...");
         targetBearing = doc["bearing"];
         targetDistance = doc["distance"];
@@ -323,10 +323,10 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  // checking for button press; sending alert if button is pressed
+  // checking for button press; sending SOS if button is pressed
   bool currentButtonState = digitalRead(BUTTON_PIN);
   if(prevButtonState == HIGH && currentButtonState == LOW) {
-    pCharacteristic->setValue("{\"alert\":\"1\"}");
+    pCharacteristic->setValue("{\"SOS\":\"1\"}");
     pCharacteristic->notify();
   }
   prevButtonState = currentButtonState;
@@ -342,7 +342,7 @@ void loop() {
   display.drawBitmap(115, 0, epd_bitmap_icons8_full_battery_24, 13, 13, WHITE);
 
   // checking if wearable is in SOS mode; display arrow and distance if it is
-  if (SOS) {
+  if (alert) {
     float currBearing = getCurrentBearing();    
     float bearingDelta = targetBearing - currBearing;
 
