@@ -6,7 +6,6 @@ int SOS = 0;
 float targetBearing = 0;
 int targetDistance = 0;
 bool deviceConnected = false;
-bool sendAlert = false;
 
 bool prevButtonState = HIGH;
 
@@ -261,7 +260,7 @@ void drawRotatedBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint16_t ang
   }
 }
 
-// --------------------
+// ---------------------------
 
 void setup() {
   Serial.begin(115200);
@@ -323,15 +322,16 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+  // checking for button press; sending alert if button is pressed
   bool currentButtonState = digitalRead(BUTTON_PIN);
   if(prevButtonState == HIGH && currentButtonState == LOW) {
     pCharacteristic->setValue("{\"alert\":\"1\"}");
     pCharacteristic->notify();
   }
-
-  // save the last state
   prevButtonState = currentButtonState;
-  
+
+  // print top bar icons
   display.clearDisplay();
   if (deviceConnected) {
     display.drawBitmap(0, 0, epd_bitmap_icons8_signal_24, 13, 13, WHITE);
@@ -340,18 +340,21 @@ void loop() {
   }
   display.drawBitmap(15, 0, epd_bitmap_icons8_online_24, 13, 13, WHITE);
   display.drawBitmap(115, 0, epd_bitmap_icons8_full_battery_24, 13, 13, WHITE);
+
+  // checking if wearable is in SOS mode; display arrow and distance if it is
   if (SOS) {
     float currBearing = getCurrentBearing();    
     float bearingDelta = targetBearing - currBearing;
 
+    // Ensuring that the delta bearing is within 0 and 360
     if(bearingDelta < 0)
       bearingDelta += 360;
     
-    // Check for wrap due to addition of declination.
     if(bearingDelta > 360)
       bearingDelta -= 360;
-      
-    drawRotatedBitmap(30, 40, epd_bitmap_arrow, (int) bearingDelta); // draw arrow
+
+    // draw arrow and helper text
+    drawRotatedBitmap(30, 40, epd_bitmap_arrow, (int) bearingDelta);
     display.setTextSize(1);
     display.setCursor(50,25);
 
@@ -368,6 +371,8 @@ void loop() {
     display.setTextSize(2);
     display.setCursor(50,35);
     display.println(String(targetDistance) + "m");
+
+  // display current time if wearable is idle
   } else {
     display.setCursor(25, 30);
     display.setTextSize(3);
