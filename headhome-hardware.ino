@@ -9,6 +9,26 @@ bool deviceConnected = false;
 
 bool prevButtonState = HIGH;
 
+// ------- Time Setup --------
+#include <EEPROM.h>
+#include <ESP32Time.h>
+
+int addr = 0;
+ESP32Time rtc(28800); // GMT + 8
+
+void writeIntIntoEEPROM(int address, int number) { 
+  EEPROM.write(address, number >> 8);
+  EEPROM.write(address + 1, number & 0xFF);
+}
+
+int readIntFromEEPROM(int address) {
+  byte byte1 = EEPROM.read(address);
+  byte byte2 = EEPROM.read(address + 1);
+  return (byte1 << 8) + byte2;
+}
+
+// ---------------------------
+
 // --- Magnetometer Setup ----
 
 #include <Wire.h>
@@ -102,12 +122,20 @@ class HeadhomeCharCallbacks: public BLECharacteristicCallbacks {
       DynamicJsonDocument doc(1024);
       deserializeJson(doc, receivedValue);
 
-      alert = doc["alert"];
+      bool isAlertPacket = doc.containsKey("alert");
+
+      if (isAlertPacket) {
+        alert = doc["alert"];
       
-      if (alert) {
-        Serial.println("SOS detected...");
-        targetBearing = doc["bearing"];
-        targetDistance = doc["distance"];
+        if (alert) {
+          Serial.println("SOS detected...");
+          targetBearing = doc["bearing"];
+          targetDistance = doc["distance"];
+        } 
+      } else {
+        int receivedTimestamp = doc["timestamp"];
+        writeIntIntoEEPROM(addr, receivedTimestamp);
+        rtc.setTime(receivedTimestamp);
       }
       
       Serial.println("**********");
@@ -241,7 +269,7 @@ void drawRotatedBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint16_t ang
   int16_t newx, newy;
   uint8_t data = 0;
 
-  float  cosa = cos(angle * DEG2RAD), sina = sin(angle * DEG2RAD);
+  float cosa = cos(angle * DEG2RAD), sina = sin(angle * DEG2RAD);
 
   x = x - ((w * cosa / 2) - (h * sina / 2));
   y = y - ((h * cosa / 2) + (w * sina / 2));
@@ -316,6 +344,17 @@ void setup() {
   BLEDevice::startAdvertising();
   Serial.println("Characteristic defined! Now you can read it in your phone!");
 
+  // time setup
+  int EEPROMtimestamp;
+  EEPROMtimestamp = readIntFromEEPROM(addr);
+  Serial.println("EEPROM timestamp: " + String(EEPROMtimestamp));
+  
+  if (!EEPROMtimestamp) {
+    EEPROMtimestamp = 1678714513;
+  }
+  
+  rtc.setTime(EEPROMtimestamp);
+
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   delay(5000);
 }
@@ -340,6 +379,11 @@ void loop() {
   }
   display.drawBitmap(15, 0, epd_bitmap_icons8_online_24, 13, 13, WHITE);
   display.drawBitmap(115, 0, epd_bitmap_icons8_full_battery_24, 13, 13, WHITE);
+
+  // print top bar time
+  display.setCursor(50, 5);
+  display.setTextSize(1);
+  display.print(rtc.getTime("%a %d"));
 
   // checking if wearable is in SOS mode; display arrow and distance if it is
   if (alert) {
@@ -374,12 +418,10 @@ void loop() {
 
   // display current time if wearable is idle
   } else {
-    display.setCursor(25, 30);
-    display.setTextSize(3);
-    display.print("7.00");
-    display.setTextSize(1);
-    display.print("PM");
+    display.setCursor(15, 30);
+    display.setTextSize(2);
+    display.print(rtc.getTime());
   }
   display.display();
-  delay(2000);
+  delay(1000);
 }
