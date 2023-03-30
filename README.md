@@ -10,7 +10,7 @@
 <img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fjingxuan.jpeg?alt=media&token=0fb3ca79-d011-4ca9-8385-6720ac5a0f5d" height="80">
 </kbd>
 <kbd>
-<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fmarc.jpeg?alt=media&token=491e54a5-3ff3-4204-b632-e01ed7317bd0" style="border-radius:50%" height="50">
+<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fmarc.jpeg?alt=media&token=491e54a5-3ff3-4204-b632-e01ed7317bd0" height="80">
 </kbd>
 </div>
 <br />
