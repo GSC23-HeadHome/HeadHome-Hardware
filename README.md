@@ -23,7 +23,7 @@
 The **HeadHome wearable** is responsible for 
 enabling the dementia patient to seek for help and providing directions when they are lost.
 
-![HeadHome](assets/HeadHome.png)
+<img src="assets/HeadHome.png" width="100%" height="80px" style="object-fit:cover"/>
 
 <h2 align="center">👨🏻‍💻 Technology Stack</h2>
 <br />
