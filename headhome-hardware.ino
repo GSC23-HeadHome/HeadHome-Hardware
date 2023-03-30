@@ -13,18 +13,31 @@ bool prevButtonState = HIGH;
 #include <EEPROM.h>
 #include <ESP32Time.h>
 
+#define EEPROM_SIZE 4
+
 int addr = 0;
 ESP32Time rtc(28800); // GMT + 8
 
-void writeIntIntoEEPROM(int address, int number) { 
-  EEPROM.write(address, number >> 8);
-  EEPROM.write(address + 1, number & 0xFF);
+long readLongFromEEPROM(long address) {
+  long four = EEPROM.read(address);
+  long three = EEPROM.read(address + 1);
+  long two = EEPROM.read(address + 2);
+  long one = EEPROM.read(address + 3);
+  
+  return ((four << 0) & 0xFF) + ((three << 8) & 0xFFFF) + ((two << 16) & 0xFFFFFF) + ((one << 24) & 0xFFFFFFFF);
 }
 
-int readIntFromEEPROM(int address) {
-  byte byte1 = EEPROM.read(address);
-  byte byte2 = EEPROM.read(address + 1);
-  return (byte1 << 8) + byte2;
+void writeLongIntoEEPROM(int address, long value) {
+  byte four = (value & 0xFF);
+  byte three = ((value >> 8) & 0xFF);
+  byte two = ((value >> 16) & 0xFF);
+  byte one = ((value >> 24) & 0xFF);
+  
+  EEPROM.write(address, four);
+  EEPROM.write(address + 1, three);
+  EEPROM.write(address + 2, two);
+  EEPROM.write(address + 3, one);
+  EEPROM.commit();
 }
 
 // ---------------------------
@@ -65,6 +78,8 @@ float getCurrentBearing(void) {
   // Hold the module so that Z is pointing 'up' and you can measure the heading with x&y
   // Calculate heading when the magnetometer is level, then correct for signs of axis.
   float heading = atan2(event.magnetic.y, event.magnetic.x);
+
+  Serial.print("Heading (degrees): "); Serial.println(heading * 180/M_PI);
   
   // Once you have your heading, you must then add your 'Declination Angle', which is the 'Error' of the magnetic field in your location.
   // Find yours here: http://www.magnetic-declination.com/
@@ -83,6 +98,8 @@ float getCurrentBearing(void) {
    
   // Convert radians to degrees for readability.
   float headingDegrees = heading * 180/M_PI; 
+
+  // Serial.println(headingDegrees);
   
   return headingDegrees;
 }
@@ -99,9 +116,11 @@ float getCurrentBearing(void) {
 // https://www.uuidgenerator.net/
 
 #define SERVICE_UUID        "d2769ce4-4941-41a8-87a8-7d8198a9ea85"
-#define CHARACTERISTIC_UUID "21b3d0b5-a458-480a-b063-629c7c1bad7b"
+#define CHARACTERISTIC_UUID_RX "21b3d0b5-a458-480a-b063-629c7c1bad7b"
+#define CHARACTERISTIC_UUID_TX "d6729370-102e-4eb3-a6e2-c1ac1fed26ff"
 
-BLECharacteristic *pCharacteristic;
+BLECharacteristic *wCharacteristic;
+BLECharacteristic *nCharacteristic;
 
 class HeadhomeServerCallbacks: public BLEServerCallbacks {
   void onConnect(BLEServer* pServer) {
@@ -114,8 +133,8 @@ class HeadhomeServerCallbacks: public BLEServerCallbacks {
 
 class HeadhomeCharCallbacks: public BLECharacteristicCallbacks {
 
-  void onWrite(BLECharacteristic *pCharacteristic) {
-    std::string rxValue = pCharacteristic->getValue();
+  void onWrite(BLECharacteristic *wCharacteristic) {
+    std::string rxValue = wCharacteristic->getValue();
 
     if (rxValue.length() > 0) {
       const char* receivedValue = rxValue.c_str();
@@ -133,8 +152,8 @@ class HeadhomeCharCallbacks: public BLECharacteristicCallbacks {
           targetDistance = doc["distance"];
         } 
       } else {
-        int receivedTimestamp = doc["timestamp"];
-        writeIntIntoEEPROM(addr, receivedTimestamp);
+        long receivedTimestamp = doc["timestamp"];
+        writeLongIntoEEPROM(addr, receivedTimestamp);
         rtc.setTime(receivedTimestamp);
       }
       
@@ -290,6 +309,8 @@ void drawRotatedBitmap(int16_t x, int16_t y, const uint8_t *bitmap, uint16_t ang
 
 // ---------------------------
 
+int test = 0;
+
 void setup() {
   Serial.begin(115200);
 
@@ -304,7 +325,7 @@ void setup() {
   
   display.setTextSize(2);
   display.setTextColor(WHITE);
-  display.setCursor(20,45);
+  display.setCursor(15,45);
   display.println("HeadHome");
   display.display();
 
@@ -325,14 +346,18 @@ void setup() {
   pServer->setCallbacks(new HeadhomeServerCallbacks());
   
   BLEService *pService = pServer->createService(SERVICE_UUID);
-  pCharacteristic = pService->createCharacteristic(
-                                         CHARACTERISTIC_UUID,
-                                         BLECharacteristic::PROPERTY_WRITE |
+  wCharacteristic = pService->createCharacteristic(
+                                         CHARACTERISTIC_UUID_RX,
+                                         BLECharacteristic::PROPERTY_WRITE
+                                       );
+  wCharacteristic->setCallbacks(new HeadhomeCharCallbacks());
+
+  nCharacteristic = pService->createCharacteristic(
+                                         CHARACTERISTIC_UUID_TX,
                                          BLECharacteristic::PROPERTY_NOTIFY
                                        );
-
-  pCharacteristic->setCallbacks(new HeadhomeCharCallbacks());
-  
+  nCharacteristic->setValue("Hello from flutter!");
+//  nCharacteristic->notify();
   pService->start();
   // BLEAdvertising *pAdvertising = pServer->getAdvertising();  // this still is working for backward compatibility
   BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
@@ -345,8 +370,9 @@ void setup() {
   Serial.println("Characteristic defined! Now you can read it in your phone!");
 
   // time setup
-  int EEPROMtimestamp;
-  EEPROMtimestamp = readIntFromEEPROM(addr);
+  EEPROM.begin(EEPROM_SIZE);
+  long EEPROMtimestamp;
+  EEPROMtimestamp = readLongFromEEPROM(addr);
   Serial.println("EEPROM timestamp: " + String(EEPROMtimestamp));
   
   if (!EEPROMtimestamp) {
@@ -356,7 +382,7 @@ void setup() {
   rtc.setTime(EEPROMtimestamp);
 
   pinMode(BUTTON_PIN, INPUT_PULLUP);
-  delay(5000);
+//  delay(5000);
 }
 
 void loop() {
@@ -364,9 +390,11 @@ void loop() {
 
   // checking for button press; sending SOS if button is pressed
   bool currentButtonState = digitalRead(BUTTON_PIN);
+
   if(prevButtonState == HIGH && currentButtonState == LOW) {
-    pCharacteristic->setValue("{\"SOS\":\"1\"}");
-    pCharacteristic->notify();
+    nCharacteristic->setValue("{\"SOS\":\"1\"}");
+    nCharacteristic->notify();
+    Serial.println("SOS Sent");
   }
   prevButtonState = currentButtonState;
 
@@ -398,7 +426,7 @@ void loop() {
       bearingDelta -= 360;
 
     // draw arrow and helper text
-    drawRotatedBitmap(30, 40, epd_bitmap_arrow, (int) bearingDelta);
+    drawRotatedBitmap(30, 40, epd_bitmap_arrow, bearingDelta);
     display.setTextSize(1);
     display.setCursor(50,25);
 
@@ -423,5 +451,9 @@ void loop() {
     display.print(rtc.getTime());
   }
   display.display();
+//  test++;
+//  if (test > 360) {
+//    test = 0;
+//  }
   delay(1000);
 }
