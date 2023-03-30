@@ -1,8 +1,17 @@
+<br />
 <div align="center">
-<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fdaozheng.jpeg?alt=media&token=96a55b42-7c9f-4e68-b41f-d986efe79c01" style="border-radius:50%" height="50">
+<kbd>
+<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fdaozheng.jpeg?alt=media&token=96a55b42-7c9f-4e68-b41f-d986efe79c01" height="50">
+</kbd>
+<kbd>
 <img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fhuixiang.jpeg?alt=media&token=72cf45a5-8208-46e1-9130-34b23755c574" style="border-radius:50%" height="50">
+</kbd>
+<kbd>
 <img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fjingxuan.jpeg?alt=media&token=0fb3ca79-d011-4ca9-8385-6720ac5a0f5d" style="border-radius:50%" height="50">
+</kbd>
+<kbd>
 <img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fmarc.jpeg?alt=media&token=491e54a5-3ff3-4204-b632-e01ed7317bd0" style="border-radius:50%" height="50">
+</kbd>
 </div>
 <br />
 <div align="center">
