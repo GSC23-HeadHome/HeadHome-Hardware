@@ -24,7 +24,7 @@
 <div align="center">
 <img src="assets/HeadHome.png" />
 </div>
-
+<br />
 
 The **HeadHome wearable** is responsible for 
 enabling the dementia patient to seek for help and providing directions when they are lost. Having an avenue to reach out for help within their fingertips via the wearable heavily reduces the chances of dementia wandering and ensures that our dementia counterparts are well taken care of!
@@ -65,3 +65,10 @@ In addition, upon `pressing the red button`, the wearable displays an optimal pa
 ## 🔗 &nbsp;Useful External Links
 1. Image to arduino bitmap converter [link](https://javl.github.io/image2cpp/)
 2. EEPROM interface [link](https://roboticsbackend.com/arduino-store-int-into-eeprom/)
+
+## 👥 &nbsp;Contributors
+The project was built by the `HeadHome Team`:
+- [Chang Dao Zheng](https://github.com/changdaozheng/)
+- [Chay Hui Xiang](https://github.com/chayhuixiang)
+- [Marc Chern Di Yong](https://github.com/Trigon25)
+- [Ong Jing Xuan](https://github.com/ongjx16)
