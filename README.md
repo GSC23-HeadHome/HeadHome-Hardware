@@ -21,13 +21,11 @@ enabling the dementia patient to seek for help and providing directions when the
 ![HeadHome Functionalities](assets/HeadHome-Functionalities.png)
 ## 1. Request for help
 
-
-
-> Whenever the dementia patient is lost, *pressing the red button* on the wearable sends a notification to the Caregiver, alerting the Caregiver of their precarious situation.
+Whenever the dementia patient is lost, `pressing the red button` on the wearable sends a notification to the Caregiver, alerting the Caregiver of their precarious situation.
 
 ## 2. Directions to Home
 
-> In addition, upon *pressing the red button*, the wearable displays an optimal path to guide the patient back home.
+In addition, upon `pressing the red button`, the wearable displays an optimal path to guide the patient back home.
 
 ## ⚙️ &nbsp;Steps to Setup
 1. Install the Arduino IDE from the link [here](https://www.arduino.cc/en/software).
