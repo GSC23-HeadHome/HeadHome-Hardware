@@ -1,13 +1,13 @@
 <br />
 <div align="center">
 <kbd>
-<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fdaozheng.jpeg?alt=media&token=96a55b42-7c9f-4e68-b41f-d986efe79c01" height="50">
+<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fdaozheng.jpeg?alt=media&token=96a55b42-7c9f-4e68-b41f-d986efe79c01" height="80">
 </kbd>
 <kbd>
-<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fhuixiang.jpeg?alt=media&token=72cf45a5-8208-46e1-9130-34b23755c574" style="border-radius:50%" height="50">
+<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fhuixiang.jpeg?alt=media&token=72cf45a5-8208-46e1-9130-34b23755c574" height="80">
 </kbd>
 <kbd>
-<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fjingxuan.jpeg?alt=media&token=0fb3ca79-d011-4ca9-8385-6720ac5a0f5d" style="border-radius:50%" height="50">
+<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fjingxuan.jpeg?alt=media&token=0fb3ca79-d011-4ca9-8385-6720ac5a0f5d" height="80">
 </kbd>
 <kbd>
 <img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fmarc.jpeg?alt=media&token=491e54a5-3ff3-4204-b632-e01ed7317bd0" style="border-radius:50%" height="50">
@@ -30,7 +30,7 @@ enabling the dementia patient to seek for help and providing directions when the
 <h2 align="center">👨🏻‍💻 Technology Stack</h2>
 <br />
 <div align="center">
-  <img src="https://brandslogos.com/wp-content/uploads/images/large/arduino-logo-1.png" height="50" />
+  <img src="https://brandslogos.com/wp-content/uploads/images/large/arduino-logo-1.png" height="80" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png" height="50">
   <img src="./assets/espressif-systems-seeklogo.com.svg" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/ArduinoJson_logo.svg/2560px-ArduinoJson_logo.svg.png" height="50" />
