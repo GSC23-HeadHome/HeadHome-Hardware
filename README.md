@@ -1,15 +1,15 @@
-<h1 align="center"> HeadHome Hardware </h1>
 <div align="center">
-<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fdaozheng.jpeg?alt=media&token=96a55b42-7c9f-4e68-b41f-d986efe79c01" style="border-radius: 25px" height="50">
-<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fhuixiang.jpeg?alt=media&token=72cf45a5-8208-46e1-9130-34b23755c574" style="border-radius: 25px" height="50">
-<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fjingxuan.jpeg?alt=media&token=0fb3ca79-d011-4ca9-8385-6720ac5a0f5d" style="border-radius: 25px" height="50">
-<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fmarc.jpeg?alt=media&token=491e54a5-3ff3-4204-b632-e01ed7317bd0" style="border-radius: 25px" height="50">
+<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fdaozheng.jpeg?alt=media&token=96a55b42-7c9f-4e68-b41f-d986efe79c01" style="border-radius:50%" height="50">
+<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fhuixiang.jpeg?alt=media&token=72cf45a5-8208-46e1-9130-34b23755c574" style="border-radius:50%" height="50">
+<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fjingxuan.jpeg?alt=media&token=0fb3ca79-d011-4ca9-8385-6720ac5a0f5d" style="border-radius:50%" height="50">
+<img src="https://firebasestorage.googleapis.com/v0/b/gsc23-12e94.appspot.com/o/members%2Fmarc.jpeg?alt=media&token=491e54a5-3ff3-4204-b632-e01ed7317bd0" style="border-radius:50%" height="50">
 </div>
 <br />
 <div align="center">
 <img src="https://img.shields.io/badge/Built%20By-HeadHome%20Team-blue?style=for-the-badge">
 </div>
 <br />
+<h1 align="center"> HeadHome Hardware </h1>
 
 The **HeadHome wearable** is responsible for 
 enabling the dementia patient to seek for help and providing directions when they are lost.
