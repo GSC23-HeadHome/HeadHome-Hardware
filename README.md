@@ -20,17 +20,18 @@
 <br />
 <h1 align="center"> HeadHome Hardware </h1>
 
-The **HeadHome wearable** is responsible for 
-enabling the dementia patient to seek for help and providing directions when they are lost.
 
 <div align="center">
 <img src="assets/HeadHome.png" />
 </div>
 
+>The **HeadHome wearable** is responsible for 
+enabling the dementia patient to seek for help and providing directions when they are lost.
+
 <h2 align="center">👨🏻‍💻 Technology Stack</h2>
 <br />
 <div align="center">
-  <img src="https://brandslogos.com/wp-content/uploads/images/large/arduino-logo-1.png" height="80" />
+  <img src="https://brandslogos.com/wp-content/uploads/images/large/arduino-logo-1.png" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png" height="50">
   <img src="./assets/espressif-systems-seeklogo.com.svg" height="50" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/ArduinoJson_logo.svg/2560px-ArduinoJson_logo.svg.png" height="50" />
