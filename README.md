@@ -20,6 +20,8 @@
 The **HeadHome wearable** is responsible for 
 enabling the dementia patient to seek for help and providing directions when they are lost. Having an avenue to reach out for help within their fingertips via the wearable heavily nullifies the repercussions of dementia wandering and ensures that our dementia counterparts are well taken care of.
 
+The HeadHome wearable was crafted using *Computer-Aided Design* and *3D Printing technologies*. Here are the links to the [STL](./HeadHome%20Watch%20Case.stl) and [STEP](./HeadHome%20Watch%20Case.step) files for the casing.
+
 <h2>👨🏻‍💻 Technology Stack</h2>
 
 <div align="center">
@@ -71,6 +73,8 @@ In addition, upon `pressing the red button`, the wearable displays an optimal pa
 ├── utils
 ├── .gitignore
 ├── headhome-hardware.ino
+├── HeadHome Watch Case.step
+├── HeadHome Watch Case.stl
 └── README.md
 ```
 
