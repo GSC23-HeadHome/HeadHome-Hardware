@@ -20,7 +20,7 @@
 The **HeadHome wearable** is responsible for 
 enabling the dementia patient to seek for help and providing directions when they are lost. Having an avenue to reach out for help within their fingertips via the wearable heavily nullifies the repercussions of dementia wandering and ensures that our dementia counterparts are well taken care of.
 
-<h2 align="center">👨🏻‍💻 Technology Stack</h2>
+<h2>👨🏻‍💻 Technology Stack</h2>
 
 <div align="center">
   <a href="https://www.arduino.cc/">
