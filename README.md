@@ -9,7 +9,7 @@
     </div>      
 </div>
 <br>
-<h1 align="center">HeadHome</h1>
+<h1 align="center">HeadHome Hardware</h1>
 
 
 <div align="center">
