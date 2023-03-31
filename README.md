@@ -62,9 +62,13 @@ Whenever the dementia patient is lost, `pressing the red button` on the wearable
 In addition, upon `pressing the red button`, the wearable displays an optimal path to guide the patient back home.
 
 # Getting Started
+This repo contains the Hardware Program for HeadHome. Click [here](https://github.com/GSC23-HeadHome/HeadHome) to view the full solution.
+
+## ⚙️ Steps to Setup
+
 1. Install the Arduino IDE from the link [here](https://www.arduino.cc/en/software).
 2. Clone this repository and open [headhome-hardware.ino](headhome-hardware.ino) in the Arduino IDE
-3. Upload the code onto your ESP32 and the code will run!
+3. Upload the code onto your ESP32 to run the code.
 
 ## 🔑 &nbsp;Key Files and Directories
 
